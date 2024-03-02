@@ -69,6 +69,20 @@ and the refactored versions by
       speech = sam.speak(this.textfield.value);
       speech.catch(() => {});
     });
+    document.getElementById('playground').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var sam = new SamJs(opts);
+      if (speech) speech.abort();
+      speech = sam.speak(this.textfield.value);
+      speech.catch(() => {});
+    });
+    document.getElementById('download').addEventListener('click', function (e) {
+      e.preventDefault();
+      var sam = new SamJs(opts);
+      if (speech) speech.abort();
+      speech = sam.download(document.getElementById('speechinput').value);
+      speech.catch(() => {});
+    });
   });
 </script>
 
@@ -83,6 +97,7 @@ and the refactored versions by
     <label id="mouth-lbl" for="mouth">Mouth:   </label><input type="range" id="mouth" min="0" max="255" value="0" />
     <label id="throat-lbl" for="throat">Throat: </label><input type="range" id="throat" min="0" max="255" value="0" />
     <input type="submit" name="Text 1" value="Say">
+    <button id="download">Download</button>
   </div>
 </form>
 <hr>
